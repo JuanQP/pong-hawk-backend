@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "pong-hawk-backend"
+version = "0.1.0"
+description = ""
+authors = ["QUINTEROS PARADA, Juan Ignacio <juanquinteros@uade.edu.ar>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.7"
+djangorestframework = "^3.14.0"
+python-environ = "^0.4.54"
+psycopg2-binary = "^2.9.9"
+django-cors-headers = "^4.3.0"
+gunicorn = "^21.2.0"
+celery = "^5.3.6"
+django-cleanup = "^8.0.0"
+ultralytics = "^8.0.184"
+# This is to avoid a weird bug in version 2.0.1
+torch = ">=2.0.0, !=2.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
