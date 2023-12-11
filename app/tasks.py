@@ -9,9 +9,10 @@ def process_video(game_id: str):
     game.save()
 
     print("Processing game...")
-    video_path, image_path = do_process(game.video.path)
-    game.processed_video = video_path
-    game.heatmap = image_path
+    result = do_process(game.video.path)
+    game.processed_video = result["video_path"]
+    game.heatmap = result["image_path"]
+    game.strategy = result["strategy"]
     game.status = Game.Status.FINISHED
     game.save()
     print("Done!")

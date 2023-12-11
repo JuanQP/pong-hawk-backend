@@ -11,10 +11,11 @@ class Game(models.Model):
         PROCESSING = "PR", "Processing"
     name = models.TextField()
     video = models.FileField()
-    processed_video = models.FileField(null=True)
-    heatmap = models.FileField(null=True)
+    processed_video = models.FileField(null=True, default=None)
+    heatmap = models.FileField(null=True, default=None)
     status = models.CharField(
         max_length=2,
         choices=Status.choices,
         default=Status.PENDING,
     )
+    strategy = models.TextField(null=True, default=None)

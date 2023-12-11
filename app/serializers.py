@@ -12,9 +12,11 @@ class GameSerializer(serializers.ModelSerializer):
             'processed_video',
             'heatmap',
             'status',
+            'strategy',
         ]
         read_only_fields = [
             'processed_video',
             'heatmap',
             'status',
+            'strategy',
         ]

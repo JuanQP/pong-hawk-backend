@@ -100,11 +100,21 @@ def process_video(video_path: str):
         combined = cv2.addWeighted(frame, 0.5, color_heatmap, 0.5, 0)
         heatmap_exported_video.write(combined)
 
-    # TODO: Create a png with the last frame
+    # Check if upper-right region of the screen has more hits than upper-left
+    heatmap_width, heatmap_height = shape
+    upper_right_region = np.row_stack([row[heatmap_height // 2:] for row in heatmap_matrix[heatmap_width // 2:]])
+    upper_left_region = np.row_stack([row[heatmap_height // 2:] for row in heatmap_matrix[:heatmap_width // 2]])
+    suggested_strategy = "Izquierda" if upper_right_region.sum() > upper_left_region.sum() else "Derecha"
+
+    # Create heatmap image and release everything
     image_path = path.with_name(f"{path.stem}-processed.png")
     cv2.imwrite(image_path.as_posix(), combined)
     video.release()
     heatmap_exported_video.release()
-
     cv2.destroyAllWindows()
-    return new_file_path.name, image_path.name
+
+    return {
+        "video_path": new_file_path.name,
+        "image_path": image_path.name,
+        "strategy": suggested_strategy,
+    }
